@@ -1,0 +1,56 @@
+$main-color: #34393f;
+$second-color: #adaeb0;
+.icon-help {
+    background-image: url("~@/assets/icons/icon-help.png");
+}
+
+.icon-search {
+    background-image: url("~@/assets/icons/icon-search.png");
+}
+
+.icon-local {
+    background-image: url("~@/assets/icons/icon-local.png");
+}
+
+.icon-my {
+    background-image: url("~@/assets/icons/icon-my.png");
+}
+
+
+/* clearfix 清除浮动，使用继承的方式调用*/
+
+%clearfix {
+    &:after {
+        clear: both;
+        content: '.';
+        display: block;
+        height: 0;
+        line-height: 0;
+        overflow: hidden;
+    }
+    *height: 1%;
+}
+
+
+/* clearfix */
+
+@mixin clearfix {
+    &:after {
+        clear: both;
+        content: '.';
+        display: block;
+        height: 0;
+        line-height: 0;
+        overflow: hidden;
+    }
+    *height: 1%;
+}
+
+@mixin webkit($type,
+$value) {
+    -webkit-#{$type}: $value;
+    -moz-#{$type}: $value;
+    -o-#{$type}: $value;
+    -ms-#{$type}: $value;
+    #{$type}: $value;
+}

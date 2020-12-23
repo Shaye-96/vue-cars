@@ -9,17 +9,18 @@ module.exports = {
     /** vue3.0内置了webpack所有东西，
      * webpack配置,see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
      **/
-    // chainWebpack: (config) => {
-    //   const svgRule = config.module.rule("svg");     
-    //   svgRule.uses.clear();     
-    //   svgRule
-    //   .use("svg-sprite-loader")
-    //   .loader("svg-sprite-loader")
-    //   .options({ 
-    //     symbolId: "icon-[name]",
-    //     include: ["./src/icons"] 
-    //   });
-    // },
+    chainWebpack: (config) => {
+        config.entry('main').add('babel-polyfill');
+        // const  svgRule  =  config.module.rule("svg");     
+        // svgRule.uses.clear();     
+        // svgRule
+        //     .use("svg-sprite-loader")
+        //     .loader("svg-sprite-loader")
+        //     .options({ 
+        //         symbolId:   "icon-[name]",
+        //         include:  ["./src/icons"] 
+        //     });
+    },
     configureWebpack: (config) => {
         config.resolve = { // 配置解析别名
             extensions: ['.js', '.json', '.vue'], // 自动添加文件名后缀
@@ -74,5 +75,5 @@ module.exports = {
     /**
      * 第三方插件配置
      */
-    pluginOptions: {}
+    pluginOptions: {},
 }
