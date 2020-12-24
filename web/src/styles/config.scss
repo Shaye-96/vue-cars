@@ -46,11 +46,20 @@ $second-color: #adaeb0;
     *height: 1%;
 }
 
-@mixin webkit($type,
+@mixin webkitB($type,
 $value) {
     -webkit-#{$type}: $value;
     -moz-#{$type}: $value;
     -o-#{$type}: $value;
     -ms-#{$type}: $value;
+    #{$type}: $value;
+}
+
+@mixin webkitA($type,
+$value) {
+    #{$type}: -webkit-#{$value};
+    #{$type}: -moz-#{$value};
+    #{$type}: -o-#{$value};
+    #{$type}: -ms-#{$value};
     #{$type}: $value;
 }

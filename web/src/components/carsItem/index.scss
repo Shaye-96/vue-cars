@@ -1,18 +1,12 @@
-.cars-wrapper {
-    position: fixed;
-    left: 0;
-    bottom: 94px;
-    z-index: 11;
-}
-
 .cars-item {
+    margin: auto;
     width: 505px;
     height: 257px;
     padding: 30px;
     background-color: #ffffff;
     border-radius: 23px;
-    @include webkit(box-sizing, border-box);
-    @include webkit(box-shadow, 0 0 18px rgba(0, 0, 0, .2));
+    @include webkitB(box-sizing, border-box);
+    @include webkitB(box-shadow, 0 0 18px rgba(0, 0, 0, .2));
     header {
         display: flex;
         align-items: center;
@@ -30,7 +24,7 @@
         }
     }
     .cars-content {
-        border-bottom: 1px solid red;
+        border-bottom: 1px solid #e1e1e1;
         position: relative;
         padding: 10px 0 7px;
         @extend %clearfix;
@@ -52,6 +46,13 @@
             ul {
                 display: inline-block;
                 margin-right: 10px;
+                @for $i from 1 through 10 {
+                    &.acitve-li-#{$i} {
+                        li:nth-child(-n+#{$i}) {
+                            @include webkitA(background, linear-gradient(#11a5f9, #0e98e8));
+                        }
+                    }
+                }
             }
             ul>li {
                 display: inline-block;
@@ -61,17 +62,36 @@
                 border-radius: 100px;
                 margin-right: 3px;
             }
-            li.active {
-                background: -moz-linear-gradient(#11a5f9, #0e98e8);
-                background: -webkit-linear-gradient(#11a5f9, #0e98e8);
-                background: -o-linear-gradient(#11a5f9, #0e98e8);
-                background: -ms-linear-gradient(#11a5f9, #0e98e8);
-                background: linear-gradient(#11a5f9, #0e98e8);
+            span {
+                color: $main-color;
+            }
+            span::first-letter {
+                color: red;
+                opacity: .8;
             }
             span.kilo {
                 font-size: 22px;
                 font-weight: bold;
             }
+        }
+    }
+    footer {
+        position: relative;
+        padding: 20px 0;
+        .paking {
+            color: $main-color;
+            opacity: .8;
+        }
+        &::after {
+            content: "";
+            position: absolute;
+            top: 18px;
+            right: 4px;
+            width: 7px;
+            height: 7px;
+            border-right: 1px solid #d8d9da;
+            border-top: 1px solid #d8d9da;
+            @include webkitB(transform, rotate(45deg))
         }
     }
 }

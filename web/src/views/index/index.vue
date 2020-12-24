@@ -11,6 +11,7 @@
 </template>
 
 <script>
+// 引入自定义组件
 import amap from "../amap/index";
 import cars from "../cars/index";
 import navBar from "@c/navBar/index";
@@ -57,7 +58,7 @@ export default {
   width: 410px;
   background-color: $main-color;
   z-index: 101;
-  @include webkit(transition, all 0.3s ease 0s);
+  @include webkitB(transition, all 0.3s ease 0s);
   // -webkit-transition: all .3s ease 0s;
   // -moz-transition: all .3s ease 0s;
   // -ms-transition: all .3s ease 0s;
