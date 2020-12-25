@@ -8,4 +8,46 @@
 
 .cars-swiper {
     padding: 0 150px;
+    .swiper-button-prev,
+    .swiper-button-next {
+        // position: relative;
+        width: 60px;
+        height: 100px;
+        background-color: #fff;
+        background-image: none;
+        @include webkitB(box-shadow, 0 0 18px rgba(0, 0, 0, .2));
+        @include webkitB(border-radius, 60px);
+        &::after {
+            content: "";
+            width: 17px;
+            height: 17px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            border-left: 3px solid $main-color;
+            border-top: 3px solid $main-color;
+            @include webkitB(box-sizing, border-box);
+        }
+        &:hover {
+            background-color: $main-color;
+            &::after {
+                border-color: #0e98e8;
+            }
+        }
+    }
+    .swiper-button-prev {
+        margin-left: 50px;
+        &::after {
+            @include webkitB(transform, rotate(-45deg));
+        }
+    }
+    .swiper-button-next {
+        margin-right: 50px;
+        &::after {
+            @include webkitB(transform, rotate(135deg));
+        }
+    }
 }
