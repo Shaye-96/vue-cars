@@ -8,6 +8,9 @@
 
 .cars-swiper {
     padding: 0 150px;
+    .swiper-container {
+        overflow: initial;
+    }
     .swiper-button-prev,
     .swiper-button-next {
         // position: relative;
@@ -17,6 +20,7 @@
         background-image: none;
         @include webkitB(box-shadow, 0 0 18px rgba(0, 0, 0, .2));
         @include webkitB(border-radius, 60px);
+        @include webkitB(transition, all .3s ease 0s);
         &::after {
             content: "";
             width: 17px;

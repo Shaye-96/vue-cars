@@ -1,6 +1,6 @@
 .cars-item {
     margin: auto;
-    width: 505px;
+    // width: 505px;
     height: 257px;
     padding: 30px;
     background-color: #ffffff;
@@ -36,7 +36,6 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            color: $main-color;
             display: flex;
             align-items: center;
             .cars-number {
@@ -62,26 +61,21 @@
                 border-radius: 100px;
                 margin-right: 3px;
             }
-            span {
-                color: $main-color;
-            }
-            span::first-letter {
-                color: red;
-                opacity: .8;
-            }
-            span.kilo {
-                font-size: 22px;
-                font-weight: bold;
-            }
         }
+    }
+    span.distance {
+        font-weight: bold;
+        &:first-letter {
+            font-weight: 400 !important;
+            opacity: .8 !important;
+        }
+    }
+    span.kilo {
+        font-size: 22px;
+        font-weight: bold;
     }
     footer {
         position: relative;
-        padding: 20px 0;
-        .paking {
-            color: $main-color;
-            opacity: .8;
-        }
         &::after {
             content: "";
             position: absolute;
@@ -92,6 +86,62 @@
             border-right: 1px solid #d8d9da;
             border-top: 1px solid #d8d9da;
             @include webkitB(transform, rotate(45deg))
+        }
+    }
+    a.paking {
+        display: inline-block;
+        padding: 20px 0;
+        color: $main-color;
+        opacity: .8;
+    }
+}
+
+.cars-details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-top: 0;
+    h4.paking {
+        border-bottom: 1px solid #e1e1e1;
+        padding-top: 10px;
+        margin-bottom: 20px;
+    }
+    img.cars {
+        height: 210px;
+    }
+    .cars-desc {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        .number {
+            font-size: 24px;
+        }
+    }
+    .ele-wrap {
+        padding: 15px 20px;
+        @include webkitB(border-radius, 100px);
+        @include webkitB( box-shadow, 0 0 10px 0 rgba(0, 0, 0, .1));
+        .ele {
+            position: relative;
+            z-index: 2;
+            height: 8px;
+            width: 20px;
+            background-color: #0e98e8;
+            @include webkitB(border-radius, 100px);
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 8px;
+                z-index: 1;
+                width: 410px;
+                background-color: #e1e1e1;
+                @include webkitB(border-radius, 100px);
+            }
         }
     }
 }
