@@ -47,14 +47,14 @@ export default {
     console.log("this is current swiper instance object", this.swiper);
     // this.swiper.slideTo(3, 1000, false)
   },
-  methods: {    
+  methods: {
     prev() {
       this.swiper.slidePrev();
     },
     next() {
       this.swiper.slideNext();
     }
-  },
+  }
 };
 </script>
 

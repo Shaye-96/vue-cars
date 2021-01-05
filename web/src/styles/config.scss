@@ -63,3 +63,19 @@ $value) {
     #{$type}: -ms-#{$value};
     #{$type}: $value;
 }
+
+.flex {
+    display: flex;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.align-center {
+    align-items: center;
+}

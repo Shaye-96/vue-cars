@@ -12,15 +12,22 @@
 <script>
 export default {
   name: "navBar",
+  props: {
+    value: {
+      type: String,
+      default: "a"
+    }
+  },
   data() {
     return {};
   },
+  mounted() {},
   methods: {
-    showUser(){
-      console.log("showUser ")
+    showUser() {
+      console.log("showUser ");
       this.$router.push({
         name: "User"
-      })
+      });
     }
   }
 };
