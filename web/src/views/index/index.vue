@@ -1,7 +1,7 @@
 <template>
   <div>
     <amap />
-    <cars />
+    <!-- <cars /> -->
     <nav-bar />
     <div id="children-wrapper" :class="[userFlag ? 'open' : '']">
       <!-- 控制盒子的位置，当路径为/user时，显示子路由内容 -->
@@ -41,7 +41,17 @@ export default {
     //   }
     // }
   },
-  mounted() {},
+  mounted() {
+    document.addEventListener("mouseup", e => {
+      const carsCon = document.getElementById("children-wrapper");
+      if (carsCon&&!carsCon.contains(e.target)) {
+        // contains()，js原生方法，用于判断DOM元素的包含关系；
+        this.$router.push({
+            name: "Index"
+          });
+      }
+    });
+  },
   methods: {}
 };
 </script>

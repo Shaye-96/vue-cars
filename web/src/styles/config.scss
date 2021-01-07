@@ -16,6 +16,34 @@ $second-color: #adaeb0;
     background-image: url("~@/assets/icons/icon-my.png");
 }
 
+.icon-money-link {
+    background-image: url("~@/assets/icons/icon-money.png");
+}
+
+.icon-order-link {
+    background-image: url("~@/assets/icons/icon-order.png");
+}
+
+.icon-authentication-link {
+    background-image: url("~@/assets/icons/icon-authentication.png");
+}
+
+.icon-security-link {
+    background-image: url("~@/assets/icons/icon-security.png");
+}
+
+.icon-helpcenter-link {
+    background-image: url("~@/assets/icons/icon-helpcenter.png");
+}
+
+i[class^="icon"] {
+    display: inline-block;
+    background-color: $main-color;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    border-radius: 100px;
+}
+
 
 /* clearfix 清除浮动，使用继承的方式调用*/
 

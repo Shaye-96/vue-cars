@@ -175,7 +175,7 @@
             }
         }
         .clause {
-            padding-top: 24px;
+            padding-top: 14px;
             i {
                 display: inline-block;
                 background-color: #cccccc;
@@ -202,7 +202,9 @@
             }
         }
         .cars-order {
-            display: flex;
+            position: absolute;
+            left: 50%;
+            bottom: -35px;
             font-size: 26px;
             font-weight: lighter;
             color: white;
@@ -210,8 +212,6 @@
             margin: 50px auto 0;
             padding: 20px 68px;
             @include webkitB(border-radius, 42px);
-            &:focus {
-                outline: 0;
-            }
+            @include webkitB(transform, translateX(-50%));
         }
     }

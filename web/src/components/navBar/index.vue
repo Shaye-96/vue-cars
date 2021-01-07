@@ -24,7 +24,6 @@ export default {
   mounted() {},
   methods: {
     showUser() {
-      console.log("showUser ");
       this.$router.push({
         name: "User"
       });
@@ -46,15 +45,10 @@ export default {
     align-items: center;
     li {
       margin: 0 17px;
-      i[class^="icon"] {
-        display: inline-block;
+      i[class^="icon"] {        
         width: 44px;
         height: 44px;
         line-height: 44px;
-        background-color: $main-color;
-        background-repeat: no-repeat;
-        cursor: pointer;
-        border-radius: 100px;
       }
       a {
         display: inline-block;
