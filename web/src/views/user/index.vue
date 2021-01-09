@@ -8,11 +8,21 @@
       </div>
     </div>
     <ul class="user-func">
-      <router-link to="aa" tag="a"><i class="icon icon-money-link"></i>我的账户</router-link>
-      <router-link to="aa" tag="a"><i class="icon icon-order-link"></i>租车订单</router-link>
-      <router-link to="aa" tag="a"><i class="icon icon-authentication-link"></i>实名认证</router-link>
-      <router-link to="aa" tag="a"><i class="icon icon-security-link"></i>安全设置</router-link>
-      <router-link to="aa" tag="a"><i class="icon icon-helpcenter-link"></i>帮助中心</router-link>
+      <router-link to="aa" tag="a" class="arrow"
+        ><i class="icon icon-money-link"></i>我的账户</router-link
+      >
+      <router-link to="aa" tag="a" class="arrow"
+        ><i class="icon icon-order-link"></i>租车订单</router-link
+      >
+      <router-link to="aa" tag="a" class="arrow"
+        ><i class="icon icon-authentication-link"></i>实名认证</router-link
+      >
+      <router-link to="/safe" tag="a" class="arrow"
+        ><i class="icon icon-security-link"></i>安全设置</router-link
+      >
+      <router-link to="aa" tag="a" class="arrow"
+        ><i class="icon icon-helpcenter-link"></i>帮助中心</router-link
+      >
     </ul>
     <a class="log-out" href="javascript:(o)">登出</a>
   </div>
@@ -64,14 +74,28 @@ export default {
   color: #9a9c9e;
   margin: 60px 0;
   a {
+    position: relative;
     display: block;
-    border-bottom: 1px solid rgba($color: #fff, $alpha: .3);
+    border-bottom: 1px solid rgba($color: #fff, $alpha: 0.3);
     padding: 25px 30px;
-    color: rgba($color: #fff, $alpha: .4);
+    color: rgba($color: #fff, $alpha: 0.4);
     font-size: 15px;
     font-weight: lighter;
   }
-  .icon{
+  .arrow::after {
+    content: "";
+    position: absolute;
+    right: 26px;
+    top: 50%;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-bottom: 1px solid rgba($color: #fff, $alpha: 0.5);
+    border-right: 1px solid rgba($color: #fff, $alpha: 0.5);
+    @include webkitB(transform, rotate(-45deg));
+    @include webkitB(box-sizing, border-box);
+  }
+  .icon {
     width: 30px;
     height: 30px;
     margin-bottom: -10px;

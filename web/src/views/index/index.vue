@@ -29,7 +29,7 @@ export default {
   computed: {
     userFlag() {
       const router = this.$route;
-      return router.name === "User" ? true : false;
+      return router.name === "Index" ? false : true;
     }
   },
   watch: {
