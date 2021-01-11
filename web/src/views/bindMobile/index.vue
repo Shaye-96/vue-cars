@@ -1,26 +1,17 @@
 <template>
   <div class="password-wrapper">
-    <HeadBack :title="'修改登录密码'" />
+    <HeadBack :title="'绑定手机号'" />
     <div class="form-wrapper">
       <el-form ref="form" :model="form">
         <el-form-item>
           <el-input
-            v-model="form.oldPassWord"
-            placeholder="原始密码"
+            v-model="form.mobile"
+            placeholder="请输入手机号"
           ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-input v-model="form.newPassWord" placeholder="新密码"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-input v-model="form.confirm" placeholder="确认密码"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <!-- <button type="button" class="button-vcode" @click="getCode">
-            获取验证码
-          </button> -->
           <ButtonVcode/>
-          <el-input v-model="form.code" placeholder="验证码"></el-input>
+          <el-input v-model="form.code" placeholder="请输入验证码"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" class="button-confirm" @click="onSubmit"
@@ -38,9 +29,7 @@ export default {
   data() {
     return {
       form: {
-        oldPassWord: "",
-        newPassWord: "",
-        confirm: "",
+        mobile: "",
         code: ""
       }
     };
@@ -74,22 +63,6 @@ export default {
     opacity: 0.2;
   }
 }
-// .button-vcode {
-//   position: absolute;
-//   top: 4px;
-//   right: 4px;
-//   z-index: 2;
-//   font-size: 12px;
-//   padding: 8px 20px;
-//   border: none;
-//   color: #ffffff;
-//   background-color: #34393f;
-//   text-align: center;
-//   outline: none;
-//   cursor: pointer;
-//   @include webkitB(box-sizing, border-box);
-//   @include webkitB(border-radius, 4px);
-// }
 .button-confirm {
   display: block;
   width: 100%;

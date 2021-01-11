@@ -48,12 +48,12 @@ export default {
     position: absolute;
     left: 0;
     top: 50%;
-    margin-top: -8px;
+    margin-top: -7px;
     display: inline-block;
-    width: 15px;
-    height: 15px;
-    border-left: 4px solid #00a3ff;
-    border-top: 4px solid #00a3ff;
+    width: 11px;
+    height: 11px;
+    border-left: 3px solid #00a3ff;
+    border-top: 3px solid #00a3ff;
     @include webkitB(transform, rotate(-45deg));
     @include webkitB(border-top-left-radius, 5px);
   }

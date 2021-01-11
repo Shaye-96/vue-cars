@@ -14,7 +14,7 @@
       <router-link to="aa" tag="a" class="arrow"
         ><i class="icon icon-order-link"></i>租车订单</router-link
       >
-      <router-link to="aa" tag="a" class="arrow"
+      <router-link to="/authentication" tag="a" class="arrow"
         ><i class="icon icon-authentication-link"></i>实名认证</router-link
       >
       <router-link to="/safe" tag="a" class="arrow"

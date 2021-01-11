@@ -20,10 +20,35 @@ const routes = [{
         component: () =>
             import ("../views/safe/index.vue")
     }, {
+        path: "/authentication",
+        name: "Authentication",
+        component: () =>
+            import ("../views/authentication/index.vue")
+    }, {
         path: "/password",
         name: "Password",
         component: () =>
             import ("../views/password/index.vue")
+    }, {
+        path: "/fund",
+        name: "Fund",
+        component: () =>
+            import ("../views/fundPassword/index.vue")
+    }, {
+        path: "/mobile",
+        name: "Mobile",
+        component: () =>
+            import ("../views/bindMobile/index.vue")
+    }, {
+        path: "/bindcard",
+        name: "BindCard",
+        component: () =>
+            import ("../views/bindCard/index.vue")
+    }, {
+        path: "/addcard",
+        name: "AddCard",
+        component: () =>
+            import ("../views/addCard/index.vue")
     }]
 }];
 

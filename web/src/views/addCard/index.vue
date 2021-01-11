@@ -1,26 +1,25 @@
 <template>
   <div class="password-wrapper">
-    <HeadBack :title="'修改登录密码'" />
+    <HeadBack :title="'添加银行卡'" />
     <div class="form-wrapper">
       <el-form ref="form" :model="form">
         <el-form-item>
-          <el-input
-            v-model="form.oldPassWord"
-            placeholder="原始密码"
-          ></el-input>
+          <el-input v-model="form.name" placeholder="开户名"></el-input>
+        </el-form-item>
+
+        <el-form-item>
+          <el-select v-model="form.bank" placeholder="请选择开户银行">
+            <el-option label="建设银行" value="shanghai"></el-option>
+            <el-option label="农业银行" value="beijing"></el-option>
+          </el-select>
+        </el-form-item>
+
+        <el-form-item>
+          <el-input v-model="form.mobile" placeholder="预留手机号"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-input v-model="form.newPassWord" placeholder="新密码"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-input v-model="form.confirm" placeholder="确认密码"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <!-- <button type="button" class="button-vcode" @click="getCode">
-            获取验证码
-          </button> -->
-          <ButtonVcode/>
-          <el-input v-model="form.code" placeholder="验证码"></el-input>
+          <ButtonVcode />
+          <el-input v-model="form.code" placeholder="手机验证码"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" class="button-confirm" @click="onSubmit"
@@ -38,9 +37,9 @@ export default {
   data() {
     return {
       form: {
-        oldPassWord: "",
-        newPassWord: "",
-        confirm: "",
+        name: "",
+        bank: "",
+        mobile: "",
         code: ""
       }
     };
@@ -49,7 +48,7 @@ export default {
   methods: {
     onSubmit() {
       console.log("submit!");
-    },
+    }
     // getCode() {
     //   console.log("getCode!");
     // }
@@ -74,22 +73,17 @@ export default {
     opacity: 0.2;
   }
 }
-// .button-vcode {
-//   position: absolute;
-//   top: 4px;
-//   right: 4px;
-//   z-index: 2;
-//   font-size: 12px;
-//   padding: 8px 20px;
-//   border: none;
-//   color: #ffffff;
-//   background-color: #34393f;
-//   text-align: center;
-//   outline: none;
-//   cursor: pointer;
-//   @include webkitB(box-sizing, border-box);
-//   @include webkitB(border-radius, 4px);
-// }
+.el-select {
+  width: 100%;
+  &:hover {
+    .el-input__inner {
+      border-color: #202429;
+    }
+  }
+  .el-icon-arrow-up:before {
+    color: #000;
+  }
+}
 .button-confirm {
   display: block;
   width: 100%;
