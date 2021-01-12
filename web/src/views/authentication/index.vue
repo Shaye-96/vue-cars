@@ -1,21 +1,19 @@
 <template>
   <div class="password-wrapper">
     <HeadBack :title="'实名认证'" />
-    <el-menu
-      :default-active="activeIndex"
-      mode="horizontal"
-      @select="handleSelect"
-    >
-      <el-menu-item index="1">身份证上传</el-menu-item>
-      <el-menu-item index="2">驾驶证上传</el-menu-item>
-    </el-menu>
+
     <div class="form-wrapper">
-      <div class="card">
-        <img src="../../assets/images/bank.png" alt="" />
-        <h4 class="bank-name">中国银行</h4>
-        <p class="number">6236 **** **** 191</p>
+      <el-tabs v-model="activeName" :stretch="true" @tab-click="handleClick">
+        <el-tab-pane label="身份证上传" name="IDCard">身份证上传</el-tab-pane>
+        <el-tab-pane label="驾驶证上传" name="DriverCard">驾驶证上传</el-tab-pane>
+      </el-tabs>
+      
+      <div>
+        <div class="card add-card"></div>
+        <p class="tips">正面</p>
+        <div class="card add-card"></div>
+        <p class="tips">反面</p>
       </div>
-      <router-link to="/addcard" tag="div" class="card add-card"></router-link>
     </div>
   </div>
 </template>
@@ -25,13 +23,13 @@ export default {
   name: "bindCard",
   data() {
     return {
-      activeIndex: "1"
+      activeName: "IDCard"
     };
   },
   mounted() {},
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+    handleClick(tab, event) {
+      console.log(tab, event);
     }
   }
 };
@@ -41,11 +39,30 @@ export default {
 .form-wrapper {
   padding: 0 30px;
 }
+.el-tabs__nav-wrap::after{
+height: 0;
+}
+.el-tabs__active-bar{
+  width: 30px !important;
+  height: 4px;
+  left: 60px;
+  background-color: #00a3ff;
+  @include webkitB(border-radius, 2px)
+}
+.el-tabs__item {
+  color: white !important;
+  opacity: 0.5;
+  &.is-active {
+    opacity:1;
+  }
+}
+
 .card {
   position: relative;
-  height: 190px;
+  height: 149px;
   border: 1px dashed #282d32;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
+  margin-top: 40px;
   color: white;
   text-align: center;
   @include webkitB(border-radius, 8px);
@@ -89,5 +106,10 @@ export default {
     border-left: 2px solid #282d32;
     margin-top: -10px;
   }
+}
+p.tips{
+color: white;
+opacity: .5;
+text-align: center;
 }
 </style>
