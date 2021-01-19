@@ -1,0 +1,23 @@
+$main-color:#344a5f;
+.icon-home {
+    background-image: url("~@/assets/icon/home.png");
+}
+
+.icon-logout {
+    background-image: url("~@/assets/icon/logout.png");
+}
+
+i[class^="icon"] {
+    display: inline-block;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+@mixin webkitB($type,
+$value) {
+    -webkit-#{$type}: $value;
+    -moz-#{$type}: $value;
+    -o-#{$type}: $value;
+    -ms-#{$type}: $value;
+    #{$type}: $value;
+}
