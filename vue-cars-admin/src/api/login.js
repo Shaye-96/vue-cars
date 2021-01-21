@@ -3,14 +3,11 @@ import service from "@/utils/request.js"
 /**
  * 获取验证码
  */
-export function getVcode() {
-    service.request({
+export function getVcode(data) {
+    return service.request({
         method: 'post',
         url: '/getSms/',
-        data: {
-            username: '1111111@qq.com',
-            module: 'login'
-        }
+        data
     })
 }
 /**

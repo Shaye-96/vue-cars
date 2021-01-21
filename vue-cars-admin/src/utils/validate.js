@@ -28,6 +28,6 @@ export function checkPassword(password) {  
  * 校验验证码
  */
 export function checkVcode(code) {  
-    let reg = /^[a-z0-9]{6}$/;
+    let reg = /^([a-z0-9]{6})$/;
     return reg.test(code) ? false : true
 }
