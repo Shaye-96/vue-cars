@@ -15,31 +15,72 @@
         status-icon
         :rules="rules"
         ref="ruleForm"
-        label-width="100px"
-        class="demo-ruleForm"
+        class="login-form"
+        size="medium "
       >
-        <el-form-item label="密码" prop="pass">
+        <el-form-item prop="username">
+          <label>邮箱</label>
           <el-input
-            type="password"
-            v-model="ruleForm.pass"
+            type="text"
+            v-model="ruleForm.username"
             autocomplete="off"
+            placeholder="请输入邮箱"
           ></el-input>
         </el-form-item>
-        <el-form-item label="确认密码" prop="checkPass">
+
+        <el-form-item prop="password">
+          <label>密码</label>
           <el-input
-            type="password"
-            v-model="ruleForm.checkPass"
+            type="text"
+            v-model="ruleForm.password"
             autocomplete="off"
+            placeholder="请输入密码"
+            minlength="6"
+            maxlength="20"
           ></el-input>
         </el-form-item>
-        <el-form-item label="年龄" prop="age">
-          <el-input v-model.number="ruleForm.age"></el-input>
+
+        <el-form-item
+          prop="passwords"
+          v-if="module == 'register' ? true : false"
+        >
+          <label>重复密码</label>
+          <el-input
+            type="text"
+            v-model="ruleForm.passwords"
+            autocomplete="off"
+            placeholder="请重新输入密码"
+            minlength="6"
+            maxlength="20"
+          ></el-input>
         </el-form-item>
+
+        <el-form-item prop="vcode">
+          <label>验证码</label>
+          <el-row :gutter="10">
+            <el-col :span="15">
+              <el-input
+                v-model.number="ruleForm.vcode"
+                placeholder="请输入验证码"
+                minlength="6"
+                maxlength="6"
+              ></el-input>
+            </el-col>
+            <el-col :span="9">
+              <el-button type="success" @click="getVcode" class="block"
+                >获取验证码</el-button
+              >
+            </el-col>
+          </el-row>
+        </el-form-item>
+
         <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')"
+          <el-button
+            type="danger"
+            @click="submitForm('ruleForm')"
+            class="login-btn block"
             >提交</el-button
           >
-          <el-button @click="resetForm('ruleForm')">重置</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -47,89 +88,116 @@
 </template>
 
 <script>
+import {
+  stripscript,
+  checkUsername,
+  checkPassword,
+  checkVcode
+} from "@/utils/validate.js";
+import { getVcode as vcodeApi } from "@/api/login.js";
 export default {
   name: "Login",
   data() {
-    var checkAge = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error("年龄不能为空"));
-      }
-      setTimeout(() => {
-        if (!Number.isInteger(value)) {
-          callback(new Error("请输入数字值"));
-        } else {
-          if (value < 18) {
-            callback(new Error("必须年满18岁"));
-          } else {
-            callback();
-          }
-        }
-      }, 1000);
-    };
-    var validatePass = (rule, value, callback) => {
+    // 用户名
+    var validateName = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("请输入密码"));
+        callback(new Error("请输入用户名"));
+      } else if (checkUsername(value)) {
+        callback(new Error("用户名格式不正确"));
       } else {
-        if (this.ruleForm.checkPass !== "") {
-          this.$refs.ruleForm.validateField("checkPass");
-        }
         callback();
       }
     };
-    var validatePass2 = (rule, value, callback) => {
+    // 密码
+    var validatePass = (rule, value, callback) => {
+      value = stripscript(value);
+      this.ruleForm.password = stripscript(value);
       if (value === "") {
-        callback(new Error("请再次输入密码"));
-      } else if (value !== this.ruleForm.pass) {
-        callback(new Error("两次输入密码不一致!"));
+        callback(new Error("请输入密码"));
+      } else if (checkPassword(value)) {
+        callback(new Error("密码格式为6-20位数字及字母的组合!"));
+      } else {
+        callback();
+      }
+    };
+    // 重复密码
+    var validatePass2 = (rule, value, callback) => {
+      console.log(rule, value, callback);
+      if (!this.ruleForm.password) {
+        callback(new Error("请先输入密码，再重复输入"));
+      } else if (value === "") {
+        callback(new Error("请输入密码"));
+      } else if (this.ruleForm.password !== value) {
+        callback(new Error("密码两次输入不一致，请重新输入"));
+      } else {
+        callback();
+      }
+    };
+    // 验证码
+    var validateVcode = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error("验证码不能为空"));
+      } else if (checkVcode(value)) {
+        callback(new Error("验证码不正确"));
       } else {
         callback();
       }
     };
     return {
+      module: "login",
       loginItem: [
         {
           id: 0,
           item: "登录",
+          module: "login",
           current: true
         },
         {
           id: 1,
           item: "注册",
+          module: "register",
           current: false
         }
       ],
       ruleForm: {
-        pass: "",
-        checkPass: "",
-        age: ""
+        username: "",
+        password: "",
+        passwords: "",
+        vcode: ""
       },
       rules: {
-        pass: [{ validator: validatePass, trigger: "blur" }],
-        checkPass: [{ validator: validatePass2, trigger: "blur" }],
-        age: [{ validator: checkAge, trigger: "blur" }]
+        username: [{ validator: validateName, trigger: "blur" }],
+        password: [{ validator: validatePass, trigger: "blur" }],
+        passwords: [{ validator: validatePass2, trigger: "blur" }],
+        vcode: [{ validator: validateVcode, trigger: "blur" }]
       }
     };
   },
   methods: {
+    // 切换tabs
     toggleMenu(data) {
       this.loginItem.forEach(item => {
         item.current = false;
       });
       data.current = true;
+      this.module = data.module;
     },
+    // 获取验证码
+    getVcode() {
+      console.log("获取验证码");
+      vcodeApi()
+    },
+    // 提交表单
     submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
-      }
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          alert("submit!");
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    }
   }
 };
 </script>
@@ -137,6 +205,7 @@ export default {
 <style lang="scss">
 #login-wrapper {
   position: relative;
+  display: flex;
   background-color: $main-color;
   height: 100%;
 }
@@ -158,6 +227,19 @@ export default {
   }
   .current {
     background-color: rgba($color: #000000, $alpha: 0.1);
+  }
+}
+.login-form {
+  label {
+    color: white;
+    font-size: 14px;
+  }
+  .block {
+    display: block;
+    width: 100%;
+  }
+  .login-btn {
+    margin-top: 10px;
   }
 }
 </style>
