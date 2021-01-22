@@ -1,7 +1,9 @@
 <template>
   <div id="index-wrapper">
     <el-container>
-      <el-aside width="250px">Aside</el-aside>
+      <el-aside width="250px">
+        <asideContent />
+      </el-aside>
       <el-container>
         <el-header height="75px">
           <i class="icon icon-home"></i>
@@ -22,10 +24,14 @@
 </template>
 
 <script>
+import asideContent from "./component/aside"
 export default {
   name: "Index",
   data() {
     return {};
+  },
+  components:{
+    asideContent
   }
 };
 </script>
