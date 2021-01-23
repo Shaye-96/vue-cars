@@ -1,66 +1,74 @@
 <template>
   <div>
-    <img class="logo" src="../../../assets/logo.png" alt="" />
-    
-      <el-menu
-        class="menu-wrapper"
-        background-color="rgba(255,255,255,0)"
-        text-color="#fff"
-        active-text-color="#fff"
-        @open="handleOpen"
-        @close="handleClose"
-        :collapse="isCollapse"
-      >
-      <template v-for="(item,index) in routers">
-        <el-submenu :index="index" :key="index">
+    <img
+      class="logo"
+      :style="isCollapse ? 'width:30px' : 'width:70px'"
+      src="../../../assets/logo.png"
+      alt=""
+    />
+
+    <el-menu
+      :class="isCollapse ? 'menu-wrapper close' : 'menu-wrapper'"
+      background-color="rgba(255,255,255,0)"
+      text-color="#fff"
+      active-text-color="#fff"
+      :router="true"
+      :collapse="isCollapse"
+    >
+      <template v-for="(item, index) in routers">
+        <el-submenu v-if="!item.hidden" :index="index + ''" :key="index">
           <!-- 一级 -->
           <template slot="title">
             <i class="el-icon-location"></i>
-            <span slot="title">导航一</span>
+            <span slot="title">{{ item.meta.name }}</span>
           </template>
           <!-- 二级 -->
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
+          <template v-for="(val, i) in item.children">
+            <el-menu-item v-if="!val.hidden" :index="val.path" :key="i">{{
+              val.meta.name
+            }}</el-menu-item>
+          </template>
         </el-submenu>
-        </template>
-      </el-menu>
+      </template>
+    </el-menu>
   </div>
 </template>
 
 <script>
 export default {
   name: "asideContent",
-  props: {
-    isCollapse: {
-      type: Boolean,
-      default: false
-    }
-  },
+  props: {},
   mounted() {
-    console.log(this.$router.options.routes);
+    console.log(this.$store.state.isCollapseAside);
+    console.log(this.$store.state.count);
+    console.log(this.$store.getters.count);
   },
   computed: {
     routers() {
       return this.$router.options.routes;
+    },
+    isCollapse() {
+      return this.$store.state.isCollapseAside;
     }
   },
-  methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    }
-  }
+  methods: {}
 };
 </script>
 
 <style lang="scss" scoped>
 .logo {
-  width: 70px;
   margin: 25px auto 20px;
+  @include webkitB(transition, all 0.3s ease 0s);
 }
 .menu-wrapper {
   width: 100%;
+}
+/deep/.el-menu-item.is-active {
+  background-color: rgba(245, 108, 108, 0.2) !important;
+}
+.close {
+  /deep/.el-submenu__title:hover {
+    background-color: #f56c6c !important;
+  }
 }
 </style>

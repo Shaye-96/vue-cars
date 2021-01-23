@@ -1,12 +1,12 @@
 <template>
   <div id="index-wrapper">
     <el-container>
-      <el-aside width="250px">
+      <el-aside :width="isCollapse?'64px':'250px'">
         <asideContent />
       </el-aside>
       <el-container>
         <el-header height="75px">
-          <i class="icon icon-home"></i>
+          <i class="icon icon-home" @click="asideStatus"></i>
           <div class="flex-right">
             <img src="../../assets/images/header-icon.jpg" alt="" />
             <span>管理员管理员管理员</span>
@@ -28,10 +28,22 @@ import asideContent from "./component/aside"
 export default {
   name: "Index",
   data() {
-    return {};
+    return {
+      
+    };
   },
   components:{
     asideContent
+  },
+  computed:{
+    isCollapse(){
+      return this.$store.state.isCollapseAside
+    }
+  },
+  methods:{
+    asideStatus(){
+      this.$store.commit('SET_COLLAPSE')
+    }
   }
 };
 </script>
@@ -45,6 +57,7 @@ export default {
 }
 .el-aside {
   background-color: #344a5f;
+  @include webkitB(transition,all 0.3s ease 0s);
 }
 .el-header {
   display: flex;

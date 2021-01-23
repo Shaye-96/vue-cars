@@ -8,12 +8,18 @@ Vue.use(VueRouter);
 const routes = [{
     path: "/",
     redirect: "/login",
-    hidden: true
+    hidden: true,
+    meta: {
+        name: "登录"
+    }
 }, {
     path: "/login",
     name: "Login",
     component: Login,
-    hidden: true
+    hidden: true,
+    meta: {
+        name: "登录"
+    }
 }, {
     path: "/home",
     name: "Home",
@@ -25,7 +31,22 @@ const routes = [{
     children: [{
         path: "/console",
         name: "Console",
-        hidden: true,
+        meta: {
+            name: "首页"
+        },
+        component: () =>
+            import ("../views/console/index.vue")
+    }]
+}, {
+    path: "/info",
+    name: "Info",
+    meta: {
+        name: "信息管理"
+    },
+    component: Home,
+    children: [{
+        path: "/consoleasd",
+        name: "Console",
         meta: {
             name: "控制台"
         },
