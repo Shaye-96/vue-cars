@@ -1,5 +1,3 @@
-import { reject, resolve } from "core-js/fn/promise";
-import { ElLoadingComponent } from "element-ui/types/loading";
 import Vue from "vue";
 import Vuex from "vuex";
 
@@ -34,17 +32,17 @@ export default new Vuex.Store({
             content.commit(SET_COUNT)
         },
         // 2. 异步，接口A、B，B接口需要A接口的参数 
-        // login(content, requestData) {
-        //     return new Promise((resolve, reject) => {
-        //         Login(requestData)
-        //             .then(response => {
-        //                 resolve(response)
-        //             })
-        //             .catch(err => {
-        //                 reject(err)
-        //             })
-        //     })
-        // }
+        login(content, requestData) {
+            return new Promise((resolve, reject) => {
+                Login(requestData)
+                    .then(response => {
+                        resolve(response)
+                    })
+                    .catch(err => {
+                        reject(err)
+                    })
+            })
+        }
         // 调用 this.$store.dispatch(login,requestData).then(res=>{ 请求接口 B }).catch(err=>{})
     },
     modules: {
