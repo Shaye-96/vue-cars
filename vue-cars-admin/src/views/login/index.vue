@@ -92,9 +92,9 @@
           >
         </el-form-item>
 
-        <el-form-item>
+        <el-form-item v-show="module == 'login'">
           <el-checkbox :checked="rememberPassword" @change="passFlagChange"
-            >记住密码+{{rememberPassword}}</el-checkbox
+            >记住密码</el-checkbox
           >
         </el-form-item>
       </el-form>
@@ -111,7 +111,7 @@ import {
   checkVcode
 } from "@/utils/validate.js";
 // Cookie
-import { setPassFlag, getPassFlag, setUserInfo } from "@/utils/app";
+import { setPassFlag, getPassFlag, setUserInfo, getUserInfo } from "@/utils/app";
 // API
 import { GetVcode, Login, Register } from "@/api/login.js";
 export default {
@@ -183,8 +183,8 @@ export default {
         }
       ],
       ruleForm: {
-        username: "1151032202@qq.com",
-        password: "yang1221",
+        username: "",
+        password: "",
         passwords: "",
         vcode: ""
       },
@@ -218,17 +218,21 @@ export default {
   },
   mounted() {
     console.log("sha1 加密", this.$sha1("123456"));
+	if(this.module=='login' && this.rememberPassword){
+		let USERNAME = getUserInfo()
+		this.ruleForm.username = USERNAME.email
+		this.ruleForm.password = USERNAME.password
+	}
   },
   computed: {
     // 记住密码
     rememberPassword: {
       // getter
       get: function() {
-        return Boolean(getPassFlag())
+        return getPassFlag() == 'true' ? true : false
       },
       // setter
       set: function(newValue) {
-        console.log(Boolean(newValue))
         return newValue
       }
     }
@@ -236,7 +240,6 @@ export default {
   methods: {
     passFlagChange(value) {
       this.rememberPassword = value
-      console.log(this.rememberPassword,value)
       setPassFlag(value);
     },
     /**
@@ -284,7 +287,6 @@ export default {
               message: res.message,
               type: "success"
             });
-            console.log(res);
           })
           .catch(err => {
             console.log(err);
@@ -351,6 +353,13 @@ export default {
             type: "success",
             message: res.message
           });
+		  if(this.rememberPassword){
+			  console.log('保存用户信息')
+			  setUserInfo({
+				  email: val.username,
+				  password: val.password
+			  })
+		  }
           const pushing = setTimeout(() => {
             this.$router.push({
               name: "Home"
@@ -368,7 +377,6 @@ export default {
     register(val) {
       Register(val)
         .then(res => {
-          console.log(res);
           this.$message({
             type: "success",
             message: res.message

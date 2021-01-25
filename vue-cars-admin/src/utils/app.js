@@ -30,7 +30,7 @@ export function removeUserName() {
 // PASSFLAG
 export function setPassFlag(value) {
     return cookie.set(PASSFLAG, value)
-    return cookie.set(PASSFLAG, value, { expires: 7 })
+    return cookie.set(PASSFLAG, value)
 }
 export function getPassFlag() {
     return cookie.get(PASSFLAG)
@@ -41,5 +41,8 @@ export function removePassFlag() {
 
 // USERINFO
 export function setUserInfo(val) {
-    return cookie.set(USERINFO, val)
+    return cookie.set(USERINFO, JSON.stringify(val))
+}
+export function getUserInfo() {
+    return JSON.parse(cookie.get(USERINFO))
 }
