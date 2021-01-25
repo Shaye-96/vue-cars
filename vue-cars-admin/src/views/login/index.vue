@@ -94,7 +94,7 @@
 
         <el-form-item>
           <el-checkbox :checked="rememberPassword" @change="passFlagChange"
-            >记住密码</el-checkbox
+            >记住密码+{{rememberPassword}}</el-checkbox
           >
         </el-form-item>
       </el-form>
@@ -224,18 +224,18 @@ export default {
     rememberPassword: {
       // getter
       get: function() {
-        return getPassFlag()
+        return Boolean(getPassFlag())
       },
       // setter
       set: function(newValue) {
-        console.log(newValue)
+        console.log(Boolean(newValue))
         return newValue
       }
     }
   },
   methods: {
     passFlagChange(value) {
-      this.rememberPassword = !this.rememberPassword
+      this.rememberPassword = value
       console.log(this.rememberPassword,value)
       setPassFlag(value);
     },
