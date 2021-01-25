@@ -38,11 +38,6 @@
 export default {
   name: "asideContent",
   props: {},
-  mounted() {
-    console.log(this.$store.state.isCollapseAside);
-    console.log(this.$store.state.count);
-    console.log(this.$store.getters.count);
-  },
   computed: {
     routers() {
       return this.$router.options.routes;

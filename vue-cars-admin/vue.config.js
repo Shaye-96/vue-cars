@@ -69,11 +69,11 @@ module.exports = {
             //     }
             // }
             '/devApi': {
-                target: "http://www.web-jshtml.cn/productapi",
+                target: "http://www.web-jshtml.cn/productapi/token",
                 changeOrigin: true,
                 pathRewrite: {
-					// '^/devApi' 正则表达式，查找以/devApi开头的 之后替换为 ""
-					// http://localhost:8080/devApi	 ==  http://www.web-jshtml.cn/productapi/devApi
+                    // '^/devApi' 正则表达式，查找以/devApi开头的 之后替换为 ""
+                    // http://localhost:8080/devApi	 ==  http://www.web-jshtml.cn/productapi/devApi
                     '^/devApi': ''
                 }
             }

@@ -1,7 +1,7 @@
 <template>
   <div id="index-wrapper">
     <el-container>
-      <el-aside :width="isCollapse?'64px':'250px'">
+      <el-aside :width="isCollapse ? '64px' : '250px'">
         <asideContent />
       </el-aside>
       <el-container>
@@ -9,8 +9,8 @@
           <i class="icon icon-home" @click="asideStatus"></i>
           <div class="flex-right">
             <img src="../../assets/images/header-icon.jpg" alt="" />
-            <span>管理员管理员管理员</span>
-            <i class="icon icon-logout"></i>
+            <span>{{ username }}</span>
+            <i class="icon icon-logout" @click="logOut"></i>
           </div>
         </el-header>
         <el-main>
@@ -24,25 +24,38 @@
 </template>
 
 <script>
-import asideContent from "./component/aside"
+import asideContent from "./component/aside";
 export default {
   name: "Index",
   data() {
-    return {
-      
-    };
+    return {};
   },
-  components:{
+  components: {
     asideContent
   },
-  computed:{
-    isCollapse(){
-      return this.$store.state.isCollapseAside
+  computed: {
+    isCollapse() {
+      return this.$store.state.isCollapseAside;
+    },
+    username() {
+      return this.$store.state.username;
     }
   },
-  methods:{
-    asideStatus(){
-      this.$store.commit('SET_COLLAPSE')
+  mounted() {
+    console.log(this.$store.state.count);
+    console.log(this.$store.getters.count);
+    // 模块
+    console.log(this.$store.state.exampleModules.example_count);
+    // 命名空间
+    this.$store.commit("exampleModules/SET_COUNT", "命名空间");
+  },
+  methods: {
+    asideStatus() {
+      this.$store.commit("SET_COLLAPSE");
+    },
+    // 退出
+    logOut() {
+      this.$router.push({ name: "Login" });
     }
   }
 };
@@ -57,7 +70,7 @@ export default {
 }
 .el-aside {
   background-color: #344a5f;
-  @include webkitB(transition,all 0.3s ease 0s);
+  @include webkitB(transition, all 0.3s ease 0s);
 }
 .el-header {
   display: flex;

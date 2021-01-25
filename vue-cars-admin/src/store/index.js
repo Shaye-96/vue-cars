@@ -1,12 +1,33 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import cookie from "js-cookie";
+
+// Cookie
+import {
+    setToken,
+    setUserName,
+    setPassFlag,
+    getToken,
+    getUserName,
+    getPassFlag
+} from "@/utils/app";
+// API
+import { Login } from "@/api/login.js";
+
+// 模块
+import exampleModules from "./example.js"
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
         // 存储基本数据
+
+        // Aside 是否折叠
         isCollapseAside: JSON.parse(window.sessionStorage.getItem('isCollapseAside')) || false,
+        // 用户信息
+        token: getToken() || '',
+        username: getUserName() || '',
         // 例子
         count: 10
     },
@@ -19,6 +40,13 @@ export default new Vuex.Store({
         SET_COLLAPSE(state) {
             state.isCollapseAside = !state.isCollapseAside
             window.sessionStorage.setItem('isCollapseAside', JSON.stringify(state.isCollapseAside))
+        },
+        // 存储用户信息
+        SET_TOKEN(state, value) {
+            state.token = value
+        },
+        SET_USERNAME(state, value) {
+            state.username = value
         },
         SET_COUNT(state, value) {
             state.count = value
@@ -36,17 +64,24 @@ export default new Vuex.Store({
             return new Promise((resolve, reject) => {
                 Login(requestData)
                     .then(response => {
-                        resolve(response)
+                        resolve(response);
+                        // 存到 vuex 状态管理器
+                        content.commit('SET_TOKEN', response.data.token);
+                        content.commit('SET_USERNAME', response.data.username);
+                        // 存到cookie
+                        setToken(response.data.token);
+                        setUserName(response.data.username);
                     })
                     .catch(err => {
                         reject(err)
                     })
             })
         }
-        // 调用 this.$store.dispatch(login,requestData).then(res=>{ 请求接口 B }).catch(err=>{})
+        // 调用 详见 login 页面的 login()
     },
     modules: {
         // 模块化Vuex
+        exampleModules
     }
 });
 /**

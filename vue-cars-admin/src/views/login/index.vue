@@ -91,18 +91,28 @@
             >{{ module == "register" ? "注册" : "登录" }}</el-button
           >
         </el-form-item>
+
+        <el-form-item>
+          <el-checkbox :checked="rememberPassword" @change="passFlagChange"
+            >记住密码</el-checkbox
+          >
+        </el-form-item>
       </el-form>
     </div>
   </div>
 </template>
 
 <script>
+// 校验
 import {
   stripscript,
   checkUsername,
   checkPassword,
   checkVcode
 } from "@/utils/validate.js";
+// Cookie
+import { setPassFlag, getPassFlag, setUserInfo } from "@/utils/app";
+// API
 import { GetVcode, Login, Register } from "@/api/login.js";
 export default {
   name: "Login",
@@ -205,11 +215,30 @@ export default {
         ]
       }
     };
-	},
-	mounted(){
-		console.log(this.$sha1("123456"))
-	},
+  },
+  mounted() {
+    console.log("sha1 加密", this.$sha1("123456"));
+  },
+  computed: {
+    // 记住密码
+    rememberPassword: {
+      // getter
+      get: function() {
+        return getPassFlag()
+      },
+      // setter
+      set: function(newValue) {
+        console.log(newValue)
+        return newValue
+      }
+    }
+  },
   methods: {
+    passFlagChange(value) {
+      this.rememberPassword = !this.rememberPassword
+      console.log(this.rememberPassword,value)
+      setPassFlag(value);
+    },
     /**
      * 切换tabs
      */
@@ -314,9 +343,10 @@ export default {
      * 登录
      */
     login(val) {
-      Login(val)
+      this.$store
+        .dispatch("login", val)
         .then(res => {
-          console.log(res);
+          console.log("Vuex actions", res);
           this.$message({
             type: "success",
             message: res.message
