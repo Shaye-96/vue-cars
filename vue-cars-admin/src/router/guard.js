@@ -9,7 +9,6 @@ import {
 const whiteRouter = ['/login']
 router.beforeEach((to, from, next) => {
     if (getToken()) {
-        console.log('Token存在')
         if (to.path === "/login") {
             removeToken();
             removeUserName();

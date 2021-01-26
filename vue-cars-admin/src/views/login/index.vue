@@ -92,7 +92,7 @@
           >
         </el-form-item>
 
-        <el-form-item v-show="module == 'login'">
+        <el-form-item v-show="module == 'login'" style="text-align: right;">
           <el-checkbox :checked="rememberPassword" @change="passFlagChange"
             >记住密码</el-checkbox
           >
@@ -111,7 +111,12 @@ import {
   checkVcode
 } from "@/utils/validate.js";
 // Cookie
-import { setPassFlag, getPassFlag, setUserInfo, getUserInfo } from "@/utils/app";
+import {
+  setPassFlag,
+  getPassFlag,
+  setUserInfo,
+  getUserInfo
+} from "@/utils/app";
 // API
 import { GetVcode, Login, Register } from "@/api/login.js";
 export default {
@@ -218,28 +223,28 @@ export default {
   },
   mounted() {
     console.log("sha1 加密", this.$sha1("123456"));
-	if(this.module=='login' && this.rememberPassword){
-		let USERNAME = getUserInfo()
-		this.ruleForm.username = USERNAME.email
-		this.ruleForm.password = USERNAME.password
-	}
+    if (this.module == "login" && this.rememberPassword) {
+      let USERNAME = getUserInfo();
+      this.ruleForm.username = USERNAME.email;
+      this.ruleForm.password = USERNAME.password;
+    }
   },
   computed: {
     // 记住密码
     rememberPassword: {
       // getter
       get: function() {
-        return getPassFlag() == 'true' ? true : false
+        return getPassFlag() == "true" ? true : false;
       },
       // setter
       set: function(newValue) {
-        return newValue
+        return newValue;
       }
     }
   },
   methods: {
     passFlagChange(value) {
-      this.rememberPassword = value
+      this.rememberPassword = value;
       setPassFlag(value);
     },
     /**
@@ -353,13 +358,13 @@ export default {
             type: "success",
             message: res.message
           });
-		  if(this.rememberPassword){
-			  console.log('保存用户信息')
-			  setUserInfo({
-				  email: val.username,
-				  password: val.password
-			  })
-		  }
+          if (this.rememberPassword) {
+            console.log("保存用户信息");
+            setUserInfo({
+              email: val.username,
+              password: val.password
+            });
+          }
           const pushing = setTimeout(() => {
             this.$router.push({
               name: "Home"

@@ -41,17 +41,25 @@ const routes = [{
     path: "/info",
     name: "Info",
     meta: {
-        name: "信息管理"
+        name: "停车场"
     },
     component: Home,
     children: [{
-        path: "/consoleasd",
-        name: "Console",
+        path: "/pakinglist",
+        name: "PakingList",
         meta: {
-            name: "控制台"
+            name: "停车场列表"
         },
         component: () =>
-            import ("../views/console/index.vue")
+            import ("../views/paking/index.vue")
+    }, {
+        path: "/addpaking",
+        name: "AddPaking",
+        meta: {
+            name: "停车场列表"
+        },
+        component: () =>
+            import ("../views/paking/addPaking.vue")
     }]
 }];
 
