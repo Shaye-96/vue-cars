@@ -2,6 +2,8 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+// 高德地图
+import "./plugin/amap/index";
 // sha1 加密
 import sha1 from "sha1";
 // cookie
