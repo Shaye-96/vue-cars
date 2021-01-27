@@ -38,8 +38,8 @@ const routes = [{
             import ("../views/console/index.vue")
     }]
 }, {
-    path: "/info",
-    name: "Info",
+    path: "/paking",
+    name: "Paking",
     meta: {
         name: "停车场"
     },
@@ -56,10 +56,50 @@ const routes = [{
         path: "/addpaking",
         name: "AddPaking",
         meta: {
-            name: "停车场列表"
+            name: "新增停车场"
         },
         component: () =>
             import ("../views/paking/addPaking.vue")
+    }]
+}, {
+    path: "/carBrand",
+    name: "CarBrand",
+    meta: {
+        name: "汽车品牌"
+    },
+    component: Home,
+    children: [{
+        path: "/brandlist",
+        name: "BrandList",
+        meta: {
+            name: "品牌列表"
+        },
+        component: () =>
+            import ("../views/brand/index.vue")
+    }]
+}, {
+    path: "/carManage",
+    name: "CarManage",
+    meta: {
+        name: "汽车管理"
+    },
+    component: Home,
+    children: [{
+        path: "/carlist",
+        name: "carList",
+        meta: {
+            name: "汽车列表"
+        },
+        component: () =>
+            import ("../views/car/index.vue")
+    }, {
+        path: "/addCar",
+        name: "addCar",
+        meta: {
+            name: "新增汽车"
+        },
+        component: () =>
+            import ("../views/car/addCar.vue")
     }]
 }];
 
